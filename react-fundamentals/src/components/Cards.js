@@ -24,7 +24,7 @@ class Cards extends Component {
         register: "Sign Up",
       },
       {
-        name: "Enterprise",
+        name: "Enterprie",
         price: "$29",
         users: "30 Users",
         storage: "15 GB of storage",
