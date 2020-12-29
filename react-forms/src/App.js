@@ -21,7 +21,7 @@ class App extends Component {
         name: this.state.name,
         password: this.state.password,
       });
-      console.log(response);
+      console.log(response.data);
     } catch (error) {
       throw error;
     }
