@@ -1,3 +1,4 @@
 import UserItem from "./UserItem";
+import Users from "./users";
 
-export { UserItem };
+export { UserItem, Users };
