@@ -9,18 +9,24 @@ export default class UserItem extends Component {
     html_url: "https://github.com/mansoor-17",
   };
   render() {
+    const { login, avatar_url, html_url } = this.state;
     return (
       <div class="card text-center">
         <img
-          src={this.state.avatar_url}
+          src={avatar_url}
           className="round-img"
           style={{ width: "120px" }}
           alt=""
         />
-        <h3>{this.state.login}</h3>
+        <h3>{login}</h3>
         <div>
-          <a href={this.state.html_url} className="btn btn-dark btn-sm my-1">
-            Github Profile target="_blank" rel="noreferrer"
+          <a
+            href={html_url}
+            className="btn btn-dark btn-sm my-1"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Github Profile
           </a>
         </div>
       </div>
