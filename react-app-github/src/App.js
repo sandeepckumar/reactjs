@@ -20,13 +20,24 @@ class App extends Component {
       throw error;
     }
   }
+
+  searchUsers = async (text) => {
+    try {
+      this.setState({ loading: true });
+      const response = await axios.get(
+        `https://api.github.com/search/users?q=${text}&per_page=30`
+      );
+      this.setState({ loading: false, users: response.data.items });
+    } catch (error) {}
+  };
+
   render() {
     return (
       <div className="App">
         <Navbar />
 
         <div className="container">
-          <Search />
+          <Search searchUsers={this.searchUsers} />
           <Users loading={this.state.loading} users={this.state.users} />
         </div>
       </div>
