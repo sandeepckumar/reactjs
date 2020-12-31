@@ -10,14 +10,14 @@ class Users extends Component {
       gridTemplateColumns: "repeat(3,1fr)",
       gridGap: "1rem",
     };
-    const { loading, user } = this.props;
+    const { loading, users } = this.props;
     return (
       <>
         {loading ? (
           <Spinner />
         ) : (
           <div style={userStyle}>
-            {this.props.users.map((user) => (
+            {users.map((user) => (
               <UserItem key={user.id} user={user} />
             ))}
           </div>
