@@ -8,19 +8,33 @@ class Search extends Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   static propTypes = {
     searchUsers: propTypes.func.isRequired,
+    clearUsers: propTypes.func.isRequired,
+    showClear: propTypes.bool.isRequired,
+    setAlert: propTypes.func.isRequired,
+    searchInUsers: propTypes.func.isRequired,
   };
-  handleChange(e) {
+
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-  }
-  handleSubmit(e) {
+    this.props.searchInUsers(e.target.value);
+    // this.props.searchUsers(this.state.SearchText);
+  };
+
+  handleSubmit = (e) => {
     e.preventDefault();
+    if (this.state.SearchText === "") {
+      return this.props.setAlert("Invalid Search String", "danger");
+    }
     this.props.searchUsers(this.state.SearchText);
-  }
+  };
+
   render() {
+    const { showClear, clearUsers } = this.props;
     return (
       <div>
         <form className="form">
@@ -37,6 +51,11 @@ class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        {showClear && (
+          <button className="btn btn-light btn-block" onClick={clearUsers}>
+            Clear
+          </button>
+        )}
       </div>
     );
   }
