@@ -20,9 +20,9 @@ function App() {
             </li>
           </ul>
           <Switch>
-            <Router path="/" component={About} />
-            <Router path="/users" component={Users} />
-            <Router path="/about" render={() => <Home />} />
+            <Route path="/users" component={Users} />
+            <Route exact path="/about" component={About} />
+            <Route path="/" component={Home} />
           </Switch>
         </header>
       </div>
