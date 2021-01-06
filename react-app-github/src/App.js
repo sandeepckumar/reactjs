@@ -2,7 +2,6 @@ import "./App.css";
 import React, { Component } from "react";
 import { Navbar, Alert } from "./components/layouts/";
 import { Users, Search } from "./components/users";
-
 import axios from "axios";
 
 class App extends Component {
