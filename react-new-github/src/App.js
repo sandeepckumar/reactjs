@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { Navbar } from "./components/layouts";
-import { Users } from "./components/users";
+import { Users, Search } from "./components/users";
 import axios from "axios";
 
 class App extends React.Component {
@@ -18,6 +18,7 @@ class App extends React.Component {
       <div className="App">
         <Navbar title="GitHub APP" icon="fab fa-github" />
         <div className="container">
+          <Search />
           <Users users={this.state.users} loading={this.state.loading} />
         </div>
       </div>
