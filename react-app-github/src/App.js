@@ -1,8 +1,10 @@
 import "./App.css";
 import React, { Component } from "react";
 import { Navbar, Alert } from "./components/layouts/";
-import { Users, Search } from "./components/users";
+import { Users, Search, User } from "./components/users";
+import About from "./components/pages/About.js";
 import axios from "axios";
+import { Router, Link, Switch } from "react-router-dom";
 
 class App extends Component {
   state = {
@@ -14,7 +16,7 @@ class App extends Component {
     try {
       this.setState({ loading: true });
       const response = await axios.get(
-        "https://api.github.com/users?client_id=<secret>&client_secret=<secret>"
+        "https://api.github.com/users?client_id=Iv1.f1ac53bac3afc76d&client_secret=ac5a818536e7be82388a8748a5d448b1f646d35d"
       );
       this.setState({ loading: false, users: response.data });
       console.log(response.data);
@@ -27,7 +29,7 @@ class App extends Component {
     try {
       this.setState({ loading: true });
       const response = await axios.get(
-        `https://api.github.com/search/users?client_id=<secret>&client_secret=<secret>&q=${text}&per_page=30`
+        `https://api.github.com/search/users?q=${text}&per_page=30&client_id=Iv1.f1ac53bac3afc76d&client_secret=ac5a818536e7be82388a8748a5d448b1f646d35d&`
       );
       this.setState({ loading: false, users: response.data.items });
     } catch (error) {}
@@ -39,6 +41,18 @@ class App extends Component {
       return u.login.startsWith(text);
     });
     this.setState({ loading: false, users: users });
+  };
+
+  getUser = async (username) => {
+    try {
+      this.setState({ loading: true });
+      const res = await axios.get(
+        `https://api.github.com/users/${username}?client_id=Iv1.f1ac53bac3afc76d&client_secret=ac5a818536e7be82388a8748a5d448b1f646d35d&`
+      );
+      this.setState({ user: res.data, loading: false });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   clearUsers = () => {
@@ -74,6 +88,18 @@ class App extends Component {
             searchInUsers={this.searchInUsers}
           />
           <Users loading={this.state.loading} users={this.state.users} />
+          <Router exact path="/about" component={About} />
+          <Router
+            exact
+            path="/user/:login"
+            render={(props) => (
+              <User
+                getUser={this.getUser}
+                loading={this.state.loading}
+                user={this.state.user}
+              />
+            )}
+          />
         </div>
       </div>
     );
