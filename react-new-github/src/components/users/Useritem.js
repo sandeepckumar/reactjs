@@ -9,17 +9,18 @@ class UserItem extends Component {
   };
 
   render() {
+    const { html_url, avatar_url, login } = this.state;
     return (
       <div className="card text-center">
         <img
-          src={this.state.avatar_url}
+          src={avatar_url}
           alt=""
           className="round-img"
           style={{ width: "120px" }}
         />
-        <h3>{this.state.login}</h3>
+        <h3>{login}</h3>
         <div>
-          <a href={this.state.html_url} className="btn btn-dark btn-sm my-1">
+          <a href={html_url} className="btn btn-dark btn-sm my-1">
             Github Profile
           </a>
         </div>
