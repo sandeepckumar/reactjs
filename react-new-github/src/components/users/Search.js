@@ -9,10 +9,18 @@ class Search extends Component {
     this.setState({ text: e.target.value });
   };
 
+  submitHandler = (e) => {
+    e.preventDefault();
+    if (this.state.text === "") {
+      return this.props.setAlert("Invalid Input", "danger");
+    }
+    this.props.searchUsers(this.state.text);
+  };
+
   render() {
     return (
       <div>
-        <form className="form">
+        <form className="form" onSubmit={this.submitHandler}>
           <input
             type="text"
             name="text"
@@ -26,6 +34,16 @@ class Search extends Component {
             className="btn btn-dark btn-block"
           />
         </form>
+        {this.props.showclear && (
+          <button
+            className="btn btn-light btn-block"
+            onClick={() => {
+              this.props.clearUsers();
+            }}
+          >
+            Clear
+          </button>
+        )}
       </div>
     );
   }
